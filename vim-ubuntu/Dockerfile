@@ -41,7 +41,7 @@ ENV PATH $HOME/neovim/bin:$PATH
 #deinvim
 RUN mkdir ~/.cache/dein
 RUN cd ~/.cache/dein && \
-RUN   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 RUN sh ./installer.sh ~/.cache/dein
 
 #add dein.toml ~/.deinvim/
@@ -68,8 +68,10 @@ RUN sh ./installer.sh ~/.cache/dein
 
 RUN apt-get -y install zsh
 RUN chsh -s /usr/bin/zsh root
+RUN cd /root/ && \
+  curl https://bitbucket.org/enxajt/dockerfiles/raw/6513cf02f75f6b311209a4e2ebca3c9b6e8d5fe0/.zshrc > .zshrc
 #ADD zshrc /root/zshrc
-RUN mv /root/zshrc /root/.zshrc
+#RUN mv /root/zshrc /root/.zshrc
 
 #ADD .alias /
 
