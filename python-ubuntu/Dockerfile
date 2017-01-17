@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils
+#RUN apt-get -y install apt-utils
 
 RUN apt-get -y install language-pack-ja-base language-pack-ja ibus-mozc
 RUN apt-get -y install man
@@ -16,6 +16,7 @@ RUN apt-get -y install git
 RUN apt-get -y install build-essential
 RUN apt-get install -qy python python-dev python-distribute python-pip ipython
 RUN pip install --upgrade pip
+
 RUN apt-get -y install vim 
 
 RUN apt-get -y install zsh
