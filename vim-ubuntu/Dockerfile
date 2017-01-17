@@ -1,18 +1,26 @@
 ﻿FROM ubuntu
-# apt-get updateやyum updateの前にはミラーサーバーを書く
-run echo "deb http://us.archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+# apt の参照先が本家なので国内からだと遅めです。ミラーを設定した方がいいが、 なし
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils
+#build警告は気にしなくてよさそう。
+#RUN apt-get install apt-utils
 
 RUN apt-get -y install language-pack-ja-base language-pack-ja ibus-mozc
 RUN apt-get -y install man
 RUN apt-get -y install manpages-ja
 #RUN update-locale LANG=ja_JP.UTF-8 LANGUAGE=ja_JP:ja
-ENV LANG ja_JP.UTF-8
-ENV LANGUAGE ja_JP.UTF-8
+#ENV LANG ja_JP.UTF-8
+#ENV LANGUAGE ja_JP.UTF-8
 #ENV LC_ALL ja_JP.UTF-8
-ENV LC_CTYPE ja_JP.UTF-8
-ENV LC_MESSAGES en_US.UTF-8
+#ENV LC_CTYPE ja_JP.UTF-8
+#ENV LC_MESSAGES en_US.UTF-8
+
+RUN apt-get -y install zsh
+RUN chsh -s /usr/bin/zsh root
+# curl -f 400番台のエラーコード時に異常終了とする
+RUN cd /root/ && \
+  curl -f https://raw.githubusercontent.com/enxajt/dockerfiles/master/.zshrc > .zshrc
+#ADD .zshrc /root/.zshrc
+#ADD .alias /
 
 RUN apt-get -y install git
               
@@ -25,10 +33,12 @@ RUN apt-get -y install luajit libluajit-5.1
 
 # NeoVim
 # deopleteというpluginをインストールしたいので
-RUN apt-get -y install python3-pip
-RUN pip3 install --upgrade pip3
-RUN pip3 install neovim
 RUN apt-get -y install libtool autoconf automake cmake g++ pkg-config unzip 
+RUN apt-get -y install python-pip
+RUN pip install --upgrade pip
+RUN apt-get -y install python3-pip
+RUN pip3 install --upgrade pip
+RUN pip3 install neovim
 RUN cd ~/ && git clone https://github.com/neovim/neovim.git
 RUN apt-get -y install curl
 RUN alias curl='curl --noproxy localhost,127.0.0.1'
@@ -41,9 +51,11 @@ ENV PATH $HOME/neovim/bin:$PATH
 #deinvim
 RUN mkdir ~/.cache/dein
 RUN cd ~/.cache/dein && \
-  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-RUN sh ./installer.sh ~/.cache/dein
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && \
+  sh ./installer.sh ~/.cache/dein
 
+#Host bitbucket.org
+#  StrictHostKeyChecking no
 #add dein.toml ~/.deinvim/
 #add dein_lazy.toml ~/.deinvim/
 
@@ -66,13 +78,4 @@ RUN sh ./installer.sh ~/.cache/dein
 #  make && \
 #  make install
 
-RUN apt-get -y install zsh
-RUN chsh -s /usr/bin/zsh root
-RUN cd /root/ && \
-  curl https://bitbucket.org/enxajt/dockerfiles/raw/6513cf02f75f6b311209a4e2ebca3c9b6e8d5fe0/.zshrc > .zshrc
-#ADD zshrc /root/zshrc
-#RUN mv /root/zshrc /root/.zshrc
-
-#ADD .alias /
-
-CMD ["/bin/bash"]
+CMD ["/bin/zsh"]
