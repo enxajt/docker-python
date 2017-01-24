@@ -27,16 +27,16 @@ RUN apt-get -y install git
 #Host bitbucket.org
 #  StrictHostKeyChecking no
 
-RUN apt-get -y install zsh
-
-# RUN useradd -ms /bin/zsh enxajt
+# RUN useradd -m enxajt
 # WORKDIR /home/enxajt
 # ENV HOME /home/enxajt
 # #export HOME="/home/enxajt"
 # USER enxajt
 
+RUN apt-get -y install zsh
 RUN chsh -s /usr/bin/zsh root
 RUN ln -s /opt/dev/zsh/.zshrc ~/.zshrc
+#curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc
 
 # それぞれの言語の拡張 vim用
 RUN apt-get -y install libperl-dev
