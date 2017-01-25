@@ -112,7 +112,8 @@ RUN npm install --global browser-sync
 RUN mkdir $HOME/plantuml
 RUN mkdir -p $HOME/plantuml/build/diagram
 RUN mkdir -p $HOME/plantuml/src
-ADD gulpfile.js /root/plantuml/
+RUN curl -L https://raw.githubusercontent.com/enxajt/plant-uml/master/gulpfile.js -o /root/plantuml/
+#ADD gulpfile.js /root/plantuml/
 RUN ln -sn /opt/dev/plantuml $HOME/plantuml/src/
 RUN cd $HOME/plantuml && npm init -y
 RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec browser-sync gulp-livereload gulp-ejs gulp-rename
