@@ -90,8 +90,8 @@ RUN ln -nfs /opt/dev/nvim/undo ~/.vim/undo
 # PlantUML
 RUN apt-get -y install default-jre
 RUN apt-get -y install graphviz
-#RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
-ADD plantuml.jar /usr/bin/
+RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
+#ADD plantuml.jar /usr/bin/
 RUN echo 'java -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml
 RUN chmod +x /usr/bin/plantuml
 
