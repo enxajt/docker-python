@@ -109,10 +109,10 @@ RUN npm install --global gulp gulp-cli
 RUN npm install --global browser-sync
 
 # gulp for plantuml
-RUN git clone https://github.com/enxajt/plantuml.git $HOME/plantuml
-RUN cd $HOME/plantuml && npm init -y
-RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename
-//RUN cd $HOME/plantuml && npm install --save-dev browser-sync gulp-livereload
+# RUN git clone https://github.com/enxajt/plantuml.git $HOME/plantuml
+# RUN cd $HOME/plantuml && npm init -y
+# RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename
+# RUN cd $HOME/plantuml && npm install --save-dev browser-sync gulp-livereload
 EXPOSE 8000 35729
 
 # remote from windows
