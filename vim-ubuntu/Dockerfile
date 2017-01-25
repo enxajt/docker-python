@@ -67,7 +67,7 @@ RUN cd ~/.cache/dein && \
   curl -f https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && \
   sh ./installer.sh ~/.cache/dein
 #deinvim install plugins
-RUN curl -f https://raw.githubusercontent.com/enxajt/nvim/master/.vimrc > /root/neovim/share/nvim/sysinit.vim
+RUN curl -f https://raw.githubusercontent.com/enxajt/nvim/master/.vimrc > $HOME/neovim/share/nvim/sysinit.vim
 RUN nvim +":silent call dein#install()" +:q
 RUN nvim +":silent UpdateRemotePlugins" +:q
 #RUN nvim -E -u NONE -S > /dev/null
@@ -109,12 +109,7 @@ RUN npm install --global gulp gulp-cli
 RUN npm install --global browser-sync
 
 # gulp for plantuml
-RUN mkdir $HOME/plantuml
-RUN mkdir -p $HOME/plantuml/build/diagram
-RUN mkdir -p $HOME/plantuml/src
-RUN curl -L https://raw.githubusercontent.com/enxajt/plant-uml/master/gulpfile.js -o /root/plantuml/gulpfile.js
-#ADD gulpfile.js /root/plantuml/
-RUN ln -sn /opt/dev/plantuml $HOME/plantuml/src/
+RUN git clone https://github.com/enxajt/plant-uml.git $HOME/plantuml
 RUN cd $HOME/plantuml && npm init -y
 RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec browser-sync gulp-livereload gulp-ejs gulp-rename
 EXPOSE 8000 35729
