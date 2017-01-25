@@ -1,4 +1,5 @@
-.exe
-.jar
-.jpg
-.png
+*.exe
+*.jar
+*.jpg
+*.png
+*.jar
