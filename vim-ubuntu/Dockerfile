@@ -115,11 +115,11 @@ RUN mkdir -p $HOME/plantuml/src
 ADD gulpfile.js /root/plantuml/
 RUN ln -sn /opt/dev/plantuml $HOME/plantuml/src/
 RUN cd $HOME/plantuml && npm init -y
-RUN cd $HOME/plantuml && npm install --save-dev gulp gulp-coffee gulp-plantuml gulp-webserver browser-sync gulp-livereload
+RUN cd $HOME/plantuml && npm install --save-dev gulp gulp-coffee gulp-plantuml gulp-webserver browser-sync gulp-livereload gulp-ejs gulp-rename
 EXPOSE 8000 35729
 
 # remote from windows
-RUN apt-get -y install xrdp
+#RUN apt-get -y install xrdp
 #RUN echo 'npwd' |passwd root --stdin
 
 WORKDIR /root/plantuml
