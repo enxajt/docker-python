@@ -35,8 +35,7 @@ RUN apt-get -y install git
 
 RUN apt-get -y install zsh
 RUN chsh -s /usr/bin/zsh root
-RUN ln -s /opt/dev/zsh/.zshrc ~/.zshrc
-#curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc
+RUN curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc
 
 # それぞれの言語の拡張 vim用
 RUN apt-get -y install libperl-dev
@@ -91,7 +90,6 @@ RUN ln -nfs /opt/dev/nvim/undo ~/.vim/undo
 RUN apt-get -y install default-jre
 RUN apt-get -y install graphviz
 RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
-#ADD plantuml.jar /usr/bin/
 RUN echo 'java -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml
 RUN chmod +x /usr/bin/plantuml
 
@@ -114,10 +112,10 @@ RUN npm install --global browser-sync
 # RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename
 # RUN cd $HOME/plantuml && npm install --save-dev browser-sync gulp-livereload
 EXPOSE 8000 35729
+#WORKDIR /root/plantuml
 
 # remote from windows
 #RUN apt-get -y install xrdp
 #RUN echo 'npwd' |passwd root --stdin
 
-WORKDIR /root/plantuml
 CMD ["/bin/zsh"]
