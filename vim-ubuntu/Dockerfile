@@ -107,12 +107,13 @@ RUN npm install --global gulp gulp-cli
 RUN npm install --global browser-sync
 
 # gulp for plantuml
-# RUN git clone https://github.com/enxajt/plantuml.git $HOME/plantuml
-# RUN cd $HOME/plantuml && npm init -y
-# RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename
-# RUN cd $HOME/plantuml && npm install --save-dev browser-sync gulp-livereload
+RUN git clone https://github.com/enxajt/plantuml.git $HOME/plantuml
+RUN ln -s ~/Notes ~/plantuml/src
+RUN cd $HOME/plantuml && npm init -y
+RUN cd $HOME/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename gulp-plumber gulp-json-transform gulp-tap
+#RUN cd $HOME/plantuml && npm install --save-dev browser-sync gulp-livereload
+WORKDIR /root/plantuml
 EXPOSE 8000 35729
-#WORKDIR /root/plantuml
 
 # remote from windows
 #RUN apt-get -y install xrdp
