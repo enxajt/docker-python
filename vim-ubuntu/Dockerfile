@@ -23,8 +23,6 @@ RUN apt-get -y install nkf
 RUN apt-get -y install sudo
 
 RUN apt-get -y install git
-RUN git config --global user.name "enxajt"
-RUN git config --global user.email enxajt@gmail.com
 
 RUN apt-get -y install zsh
 RUN chsh -s /usr/bin/zsh root
@@ -109,13 +107,17 @@ RUN npm install --global gulp gulp-cli
 RUN npm install --global browser-sync
 
 USER enxajt
+RUN git config --global user.name "enxajt"
+RUN git config --global user.email enxajt@gmail.com
 
 # gulp for plantuml
-RUN git clone https://github.com/enxajt/plantuml.git /home/enxajt/plantuml
+RUN sudo apt-get update && sudo apt-get install libnotify-bin
+RUN ln -s /home/enxajt/shared/virtualbox/plantuml/dst /home/enxajt/plantuml/dst
+RUN ln -s /home/enxajt/shared/virtualbox/plantuml/ejs /home/enxajt/plantuml/ejs
+RUN ln -s /home/enxajt/shared/virtualbox/plantuml/gulpfile.js /home/enxajt/plantuml/
 RUN ln -s /home/enxajt/shared/rsync/Notes /home/enxajt/plantuml/src
 RUN cd /home/enxajt/plantuml && npm init -y
-RUN cd /home/enxajt/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename gulp-plumber gulp-json-transform gulp-tap gulp-notify
-#RUN cd /home/enxajt/plantuml && npm install --save-dev browser-sync gulp-livereload
+RUN cd /home/enxajt/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename gulp-plumber gulp-json-transform gulp-tap
 EXPOSE 8000 35729
 
 CMD ["/bin/zsh"]
