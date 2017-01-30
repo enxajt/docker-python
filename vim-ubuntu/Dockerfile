@@ -58,7 +58,8 @@ RUN cd /home/enxajt/.cache/dein && \
   sh ./installer.sh /home/enxajt/.cache/dein
 
 # vim dotfiles
-RUN git clone https://github.com/enxajt/nvim.git /home/enxajt/.vim
+RUN mkdir -p /home/enxajt/.config
+RUN git clone https://github.com/enxajt/nvim.git /home/enxajt/.config/nvim
 # RUN nkf -Lu --overwrite /home/enxajt/.vim/.vimrc
 #RUN sudo ln -s /home/enxajt/.vim/.vimrc /root/neovim/share/nvim/sysinit.vim
 # missing for root?
