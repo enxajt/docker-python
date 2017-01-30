@@ -71,18 +71,12 @@ RUN nvim +":silent call dein#install()" +:q
 RUN nvim +":silent UpdateRemotePlugins" +:q
 #RUN nvim -E -u NONE -S > /dev/null
 
-# PlantUML
+# PlantUML jre
 RUN apt-get -y install default-jre
-#RUN apt-get -y install default-jre
 RUN apt-get -y install graphviz
 RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
 RUN echo 'java -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml
 RUN chmod +x /usr/bin/plantuml
-# PlantUML
-#RUN sudo apt-get -y install graphviz
-#RUN sudo curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
-#RUN sudo echo 'java -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml
-#RUN sudo chmod +x /usr/bin/plantuml
 
 # nodejs npm
 RUN apt-get install -y build-essential
@@ -111,10 +105,11 @@ RUN git config --global user.name "enxajt"
 RUN git config --global user.email enxajt@gmail.com
 
 # gulp for plantuml
-RUN sudo apt-get update && sudo apt-get install libnotify-bin
-RUN ln -s /home/enxajt/shared/virtualbox/plantuml/dst /home/enxajt/plantuml/dst
-RUN ln -s /home/enxajt/shared/virtualbox/plantuml/ejs /home/enxajt/plantuml/ejs
-RUN ln -s /home/enxajt/shared/virtualbox/plantuml/gulpfile.js /home/enxajt/plantuml/
+RUN git clone https://github.com/enxajt/plantuml.git /home/enxajt/plantuml
+# RUN mkdir -p /home/enxajt/plantuml
+# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/dst /home/enxajt/plantuml/
+# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/ejs /home/enxajt/plantuml/
+# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/gulpfile.js /home/enxajt/plantuml/
 RUN ln -s /home/enxajt/shared/rsync/Notes /home/enxajt/plantuml/src
 RUN cd /home/enxajt/plantuml && npm init -y
 RUN cd /home/enxajt/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename gulp-plumber gulp-json-transform gulp-tap
