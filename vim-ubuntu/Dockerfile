@@ -106,10 +106,6 @@ RUN nvim +":silent UpdateRemotePlugins" +:q
 
 # gulp for plantuml
 RUN git clone https://github.com/enxajt/plantuml.git /home/enxajt/plantuml
-# RUN mkdir -p /home/enxajt/plantuml
-# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/dst /home/enxajt/plantuml/
-# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/ejs /home/enxajt/plantuml/
-# RUN ln -s /home/enxajt/shared/virtualbox/plantuml/gulpfile.js /home/enxajt/plantuml/
 RUN ln -s /home/enxajt/shared/rsync/Notes /home/enxajt/plantuml/src
 RUN cd /home/enxajt/plantuml && npm init -y
 RUN cd /home/enxajt/plantuml && npm install --save-dev gulp path gulp-plantuml gulp-webserver gulp-print gulp-cached gulp-exec gulp-ejs gulp-rename gulp-plumber gulp-json-transform gulp-tap
