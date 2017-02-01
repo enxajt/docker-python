@@ -80,7 +80,7 @@ WORKDIR /home/enxajt
 RUN git config --global user.name "enxajt"
 RUN git config --global user.email enxajt@gmail.com
 RUN git clone https://github.com/enxajt/linux.git /home/enxajt/linux
-RUN nkf -Lu --overwrite /home/linux/
+RUN nkf -Lu --overwrite /home/enxajt/linux/*
 RUN ln -sb /home/enxajt/linux/.zshrc > /home/enxajt/.zshrc
 RUN ln -s /home/enxajt/linux/.tmux.conf > /home/enxajt/.tmux.conf
 
