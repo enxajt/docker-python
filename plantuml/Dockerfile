@@ -21,7 +21,9 @@ ENV LC_ALL C.UTF-8
 # PlantUML jre
 RUN apt-get update && apt-get install -y \
   default-jre \
-  graphviz
+  graphviz \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 #RUN curl -L http://sourceforge.net/projects/plantuml/files/plantuml.jar/download -o /usr/bin/plantuml.jar
 COPY plantuml.jar /usr/bin/plantuml.jar
 RUN echo 'java -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml
@@ -31,7 +33,9 @@ RUN chmod +x /usr/bin/plantuml
 RUN apt-get update && apt-get install -y \
   build-essential \
   nodejs \
-  npm
+  npm \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 RUN npm cache clean
 RUN npm install n -g
 RUN n stable
@@ -44,8 +48,9 @@ RUN npm install --global gulp gulp-cli
 ENV USER enxajt
 RUN useradd -m -g sudo -s /bin/zsh $USER && echo "$USER:$USER" | chpasswd
 USER $USER
-WORKDIR /home/$USER
-
+ENV HOME /home/$USER
+WORKDIR $HOME
+# #export HOME="/home/enxajt"
 RUN git config --global user.name "$USER"
 RUN git config --global user.email $USER@gmail.com
 
